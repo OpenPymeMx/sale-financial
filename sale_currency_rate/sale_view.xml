@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+        <record model="ir.ui.view" id="view_order_form_currency_rate">
+            <field name="name">sale.order.form.currency_rate</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_button_confirm']" position="before">
+                    <button name="%(action_force_currency_rate)d" type="action"
+                        string="Force currency rate" states="draft"/>
+                </xpath>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="currency_rate"
+                           attrs="{'readonly':[('state','!=','draft')], 'invisible':[('currency_rate', '=', 0.0)]}"
+                           groups="product.group_sale_pricelist"/>
+                </xpath>
+            </field>
+        </record>
+
+</data>
+</openerp>
