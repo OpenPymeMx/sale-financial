@@ -11,6 +11,9 @@ env:
 virtualenv:
   system_site_packages: true
 
+before_install:
+  - git clone https://github.com/OCA/account-invoicing.git $HOME/account-invoicing -b ${VERSION}
+
 install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
