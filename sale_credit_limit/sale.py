@@ -65,6 +65,7 @@ class sale_order(orm.Model):
             # should we take into account the confirmed sale order that are
             # not invoiced yet ?
             if (
+                    not partner_credit_limit == 0.0 and
                     partner_balance + total_so_company_currency
                     > partner_credit_limit):
                 company_cur_symbol = order.company_id.currency_id.symbol
