@@ -20,21 +20,34 @@
 #
 ###############################################################################
 
-from openerp.osv import fields, orm
+from openerp import fields, models
 
 
-class sale_order(orm.Model):
-    _inherit = "sale.order"
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
 
-    _columns = {
-        'currency_rate': fields.float(
-            'Forced currency rate',
-            help="You can force the currency rate on the sale with this "
-                 "field. This will also force it on the invoice.")
-        }
+    currency_rate = fields.Float(
+        'Forced currency rate',
+        help='You can force the currency rate on the sale with this '
+        'field. This will also force it on the invoice.',
+    )
 
     def _prepare_invoice(self, cr, uid, order, lines, context=None):
-        invoice_vals = super(sale_order, self)._prepare_invoice(
+        invoice_vals = super(SaleOrder, self)._prepare_invoice(
             cr, uid, order, lines, context=context)
         invoice_vals.update({'currency_rate': order.currency_rate})
         return invoice_vals
+
+
+class sale_advance_payment_inv(models.TransientModel):
+    _inherit = 'sale.advance.payment.inv'
+
+    def _prepare_advance_invoice_vals(self, cr, uid, ids, context=None):
+        result = super(sale_advance_payment_inv, self)._prepare_advance_invoice_vals(
+            cr, uid, ids, context=context,
+        )
+        for sale_id, inv_values in result:
+            order = self.pool.get('sale.order').browse(
+                cr, uid, sale_id, context=context)
+            inv_values.update({'currency_rate': order.currency_rate})
+        return result

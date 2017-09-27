@@ -20,41 +20,35 @@
 #
 ###############################################################################
 
-from openerp.osv import fields, orm
+from openerp import api, fields, models
 
 
-class sale_force_currency_rate(orm.TransientModel):
-    _name = "sale.force.currency.rate"
-    _description = "Force currency rate"
+class sale_force_currency_rate(models.TransientModel):
+    _name = 'sale.force.currency.rate'
+    _description = 'Force currency rate'
 
-    _columns = {
-        'currency_rate': fields.float(
-            'Forced currency rate',
-            help="You can force the currency rate on the sale order with this "
-                 "field. It will be also set on the invoice.")
-        }
+    @api.model
+    def _default_currency_rate(self):
+        sale_order = self.env['sale.order'].browse(
+            self._context.get('active_id', False),
+        )
+        currency = sale_order.currency_id.with_context(
+            date=sale_order.date_order or fields.Date.context_today(self),
+        )
+        return currency.compute(1.0, sale_order.company_id.currency_id)
 
-    def _get_currency_rate(self, cr, uid, context=None):
-        if context is None:
-            context = {}
-        rate = 1
-        if context.get('active_id'):
-            sale = self.pool['sale.order'].browse(
-                cr, uid, context['active_id'], context=context)
-            rate = sale.currency_id.rate
-        return rate
+    currency_rate = fields.Float(
+        'Forced currency rate',
+        default=lambda self: self._default_currency_rate(),
+        help='You can force the currency rate on the sale order with this '
+        'field. It will be also set on the invoice.',
+    )
 
-    _defaults = {
-        'currency_rate': _get_currency_rate,
-        }
-
-    def force_currency_rate(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        if context.get('active_id'):
-            wizard = self.browse(cr, uid, ids[0], context=context)
-            self.pool['sale.order'].write(
-                cr, uid, context['active_id'],
-                {'currency_rate': wizard.currency_rate},
-                context=context)
+    @api.multi
+    def force_currency_rate(self):
+        self.ensure_one()
+        sale_order = self.env['sale.order'].browse(
+            self._context.get('active_id', False),
+        )
+        sale_order.currency_rate = self.currency_rate
         return {'type': 'ir.actions.act_window_close'}

@@ -1,39 +1,41 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_currency_rate
+# 	* sale_currency_rate
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0rc7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-27 06:52+0000\n"
-"PO-Revision-Date: 2017-09-27 06:52+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2017-09-27 01:57-0500\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.3\n"
+"Last-Translator: Agustín Cruz <agustin.cruz@openpyme.mx>\n"
+"Language: es_MX\n"
 
 #. module: sale_currency_rate
 #: view:sale.force.currency.rate:sale_currency_rate.sale_force_currency_rate_view
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: sale_currency_rate
 #: field:sale.force.currency.rate,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: sale_currency_rate
 #: field:sale.force.currency.rate,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: sale_currency_rate
 #: field:sale.force.currency.rate,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre desplegado"
 
 #. module: sale_currency_rate
 #: model:ir.actions.act_window,name:sale_currency_rate.action_force_currency_rate
@@ -41,13 +43,13 @@ msgstr ""
 #: view:sale.force.currency.rate:sale_currency_rate.sale_force_currency_rate_view
 #: view:sale.order:sale_currency_rate.view_order_form_currency_rate
 msgid "Force currency rate"
-msgstr ""
+msgstr "Tipo de cambio"
 
 #. module: sale_currency_rate
 #: field:sale.force.currency.rate,currency_rate:0
 #: field:sale.order,currency_rate:0
 msgid "Forced currency rate"
-msgstr ""
+msgstr "Tipo de cambio"
 
 #. module: sale_currency_rate
 #: field:sale.force.currency.rate,id:0
@@ -72,25 +74,34 @@ msgstr ""
 #. module: sale_currency_rate
 #: model:ir.model,name:sale_currency_rate.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Pedido de venta"
 
 #. module: sale_currency_rate
 #: view:sale.force.currency.rate:sale_currency_rate.sale_force_currency_rate_view
 msgid "Set the currency rate you want to force on this sale order."
 msgstr ""
+"Seleccione el tipo de cambio que se quiere establecer para esta orden de "
+"venta."
 
 #. module: sale_currency_rate
 #: help:sale.force.currency.rate,currency_rate:0
-msgid "You can force the currency rate on the sale order with this field. It will be also set on the invoice."
+msgid ""
+"You can force the currency rate on the sale order with this field. It will "
+"be also set on the invoice."
 msgstr ""
+"Puede seleccionar un tipo de cambio para esta orden en este campo. El tipo "
+"de cambio será copiado a la factura."
 
 #. module: sale_currency_rate
 #: help:sale.order,currency_rate:0
-msgid "You can force the currency rate on the sale with this field. This will also force it on the invoice."
+msgid ""
+"You can force the currency rate on the sale with this field. This will also "
+"force it on the invoice."
 msgstr ""
+"Puede seleccionar un tipo de cambio para esta orden en este campo. El tipo "
+"de cambio será copiado a la factura."
 
 #. module: sale_currency_rate
 #: view:sale.force.currency.rate:sale_currency_rate.sale_force_currency_rate_view
 msgid "or"
-msgstr ""
-
+msgstr "o"

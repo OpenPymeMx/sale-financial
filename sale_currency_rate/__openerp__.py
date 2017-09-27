@@ -32,8 +32,9 @@
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
     'depends': [
-        'account_invoice_currency_rate',
-        'sale'],
+        'account',
+        'sale',
+    ],
     'data': [
         'wizard/force_currency_rate_view.xml',
         'sale_view.xml',
